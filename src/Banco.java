@@ -7,29 +7,31 @@ public class Banco {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
 
-        Conta conta1 = new Conta();
+        System.out.print("Informe o número da conta: ");
+        int numeroConta = sc.nextInt();
+        sc.nextLine();
 
-        System.out.println("Informe o número da conta: ");
-        conta1.setNumConta(sc.nextInt());
+        System.out.print("Informe o nome do titular: ");
+        String nomeTitular = sc.nextLine();
 
-        System.out.println("Informe o nome do titular: ");
-        conta1.setNomeConta(sc.next());
-        System.out.println("Haverá depósito inicial (s/n)? ");
+        System.out.print("Haverá depósito inicial (s/n)? ");
         char resposta = sc.next().charAt(0);
-        conta1.setSaldo(0);
 
+        double saldoInicial = 0;
         if (resposta == 's' || resposta == 'S') {
             System.out.print("Informe o valor do depósito inicial: ");
-            conta1.setSaldo(sc.nextDouble());
+            saldoInicial = sc.nextDouble();
         }
+
+        Conta conta1 = new Conta(numeroConta, nomeTitular, saldoInicial);
         conta1.exibirDados();
 
-        System.out.print("Informe um valor para depósito: ");
+        System.out.print("\nInforme um valor para depósito: ");
         double valorDeposito = sc.nextDouble();
         conta1.depositar(valorDeposito);
         conta1.exibirDados();
 
-        System.out.print("Informe um valor para saque: ");
+        System.out.print("\nInforme um valor para saque: ");
         double valorSaque = sc.nextDouble();
         conta1.sacar(valorSaque);
         conta1.exibirDados();
@@ -37,3 +39,4 @@ public class Banco {
         sc.close();
     }
 }
+

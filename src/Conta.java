@@ -1,48 +1,50 @@
 public class Conta {
-    private String nomeConta;
+    private String nomeTitular;
     private int numConta;
     private double saldo;
+    private static final double TAXA_SAQUE = 5.00;
 
-
-    public Conta(){
-    }
-
-    public Conta(String nomeConta, int numConta, double saldo){
-        this.nomeConta = nomeConta;
+    public Conta(int numConta, String nomeTitular, double saldoInicial) {
         this.numConta = numConta;
-        this.saldo = saldo;
+        this.nomeTitular = nomeTitular;
+        this.saldo = saldoInicial;
     }
 
-    public void depositar(double valor){
+    public void depositar(double valor) {
         if (valor > 0) {
             saldo += valor;
-            System.out.println("Depósito realizado com sucesso.");
-        }else {
-            System.out.println("Valor invalido para depósito.");
+            System.out.println("Depósito de R$" + valor + " realizado com sucesso.");
+        } else {
+            System.out.println("Valor inválido para depósito.");
         }
     }
 
-    public void sacar(double valor){
-        double valorTotal = valor + 5.00;
-        saldo -= valorTotal;
-        System.out.println("Saque realizado. Taxa de $5.00 cobrada.");
+    public void sacar(double valor) {
+        double valorTotal = valor + TAXA_SAQUE;
+        if (valorTotal > saldo) {
+            System.out.println("Saldo insuficiente para saque.");
+        } else {
+            saldo -= valorTotal;
+            System.out.println("Saque de R$" + valor + " realizado. Taxa de R$5.00 cobrada.");
+        }
     }
 
-    public void exibirDados(){
+    public void exibirDados() {
+        System.out.println("\n--- Dados da Conta ---");
         System.out.println("Número da conta: " + numConta);
-        System.out.println("Nome do titular: " + nomeConta);
-        System.out.println("Saldo: " + saldo);
+        System.out.println("Nome do titular: " + nomeTitular);
+        System.out.printf("Saldo: R$%.2f\n", saldo);
     }
 
-    public void setNumConta(int numConta){
-        this.numConta = numConta;
+    public int getNumConta() {
+        return numConta;
     }
 
-    public void setNomeConta(String nomeConta){
-        this.nomeConta = nomeConta;
+    public String getNomeTitular() {
+        return nomeTitular;
     }
 
-    public void setSaldo(double saldo){
-        this.saldo = saldo;
+    public double getSaldo() {
+        return saldo;
     }
 }
